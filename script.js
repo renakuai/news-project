@@ -57,7 +57,9 @@ btn.addEventListener('touchend', () => {
 )
 
 const sendRequest = (req) => {
-  fetch(req)
+  fetch(req , {
+    mode: 'cors'
+  })
   .then(function (response) {
     return response.json();
   })
@@ -119,7 +121,9 @@ const getOpposite = () => {
 }
 
 const sendOppositeRequest = (oppReq) => {
-  fetch(oppReq)
+  fetch(oppReq, {
+    mode: 'cors'
+  })
   .then(function (response) {
     return response.json();
   })
