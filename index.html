@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OppositeNews</title>
+  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="main">
+    <div class="title"><img src="img/oppositenews.svg" id="logo"></div>
+    <div class="content">
+      <div class="about">A project to highlight how the same topics are portrayed by news outlets in countries that have
+        opposite viewpoints.
+
+        <div class="instructions">
+          <ol>
+            <li>Type in a topic
+            <li>Pick a country you want to see news from
+            <li>Click search and see the most recent news results based on your topic from both your selected country
+              and an opposite counterpart.
+          </ol>
+        </div>
+
+        <div class="sources">Built using vanilla JS + the Mediastack API</div>
+      </div>
+      <div class="search">
+        <form onsubmit="return false;">
+          <fieldset class="inputs">
+            <label for="search-topic">Topic</label>
+            <input type="text" id="search-topic" name="search-topic" placeholder="Search for any topic">
+          </fieldset>
+
+          <div class="divider"></div>
+
+          <fieldset class="inputs">
+            <label for="search-country">Pick a country</label>
+            <select name="search-country" id="search-country">
+              <option value="cn">🇨🇳 China</option>
+              <option value="us">🇺🇸 United States</option>
+              <option value="gb">🇬🇧 United Kingdom</option>
+            </select>
+          </fieldset>
+
+          <button id="search-btn">Search</button>
+        </form>
+      </div>
+
+      <div class="results">
+        <div class="country-results">
+          <div class="country-title"></div>
+        </div>
+
+        <div class="opposite-results">
+          <div class="opposite-title"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>
