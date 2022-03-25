@@ -44,6 +44,18 @@ btn.addEventListener('click', () => {
   }
 )
 
+//mobile
+btn.addEventListener('touchend', () => {
+  manipulateDOM.clearDOM();
+  let searchTerm = '&keywords=' + document.getElementById('search-topic').value;
+  let country = '&countries=' + document.getElementById('search-country').value;
+  let fullURL = url + searchTerm + country;
+  console.log(fullURL)
+  const req = new Request(fullURL);
+  sendRequest(req);
+  }
+)
+
 const sendRequest = (req) => {
   fetch(req)
   .then(function (response) {
