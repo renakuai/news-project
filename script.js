@@ -1,3 +1,4 @@
+
 const groupA = ['us', 'gb'];
 const groupB = ['cn'];
 const url = 'http://api.mediastack.com/v1/news?access_key=bfd3cc3bb247d9c0acedfb3c6cedc8f4&sort=published_desc';
