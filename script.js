@@ -57,9 +57,7 @@ btn.addEventListener('touchend', () => {
 )
 
 const sendRequest = (req) => {
-  fetch(req, {
-    mode: 'cors',
-  })
+  fetch(req)
   .then(function (response) {
     return response.json();
   })
