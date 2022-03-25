@@ -1,2 +1,2 @@
 # opposite-news-project
-Practice using an API
+A practice project to showcase work with APIs. A fun project to display "opposite" country news.
