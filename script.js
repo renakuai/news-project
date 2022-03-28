@@ -1,6 +1,6 @@
-const groupA = ['us', 'gb'];
-const groupB = ['cn'];
-const url = 'http://api.mediastack.com/v1/news?access_key=bfd3cc3bb247d9c0acedfb3c6cedc8f4&sort=published_desc';
+const groupA = ['us', 'gb', 'au'];
+const groupB = ['cn', 'ru', 'pk'];
+const url = 'https://api.thenewsapi.com/v1/news/top?api_token=6S27st87VnHLOxnpNTiFFOmDcVv0ZYOE5rkeQgCc';
 
 
 const searchBar = document.querySelector('.search');
@@ -35,9 +35,10 @@ window.addEventListener('click', (e) => {
 const btn = document.getElementById('search-btn')
 btn.addEventListener('click', () => {
   manipulateDOM.clearDOM();
-  let searchTerm = '&keywords=' + document.getElementById('search-topic').value;
-  let country = '&countries=' + document.getElementById('search-country').value;
-  let fullURL = url + searchTerm + country;
+  const lang = '&language=en';
+  let country = '&locale=' + document.getElementById('search-country').value;
+  let searchTerm = '&search=' + document.getElementById('search-topic').value;
+  let fullURL = url + lang + country + searchTerm;
   console.log(fullURL)
   const req = new Request(fullURL);
   sendRequest(req);
@@ -47,10 +48,10 @@ btn.addEventListener('click', () => {
 //mobile
 btn.addEventListener('touchend', () => {
   manipulateDOM.clearDOM();
-  let searchTerm = '&keywords=' + document.getElementById('search-topic').value;
-  let country = '&countries=' + document.getElementById('search-country').value;
-  let fullURL = url + searchTerm + country;
-  console.log(fullURL)
+  const lang = '&language=en';
+  let country = '&locale=' + document.getElementById('search-country').value;
+  let searchTerm = '&search=' + document.getElementById('search-topic').value;
+  let fullURL = url + lang + country + searchTerm;
   const req = new Request(fullURL);
   sendRequest(req);
   }
@@ -73,15 +74,24 @@ const sendRequest = (req) => {
 const populateContent = (data) => {
   const countryTitle = document.querySelector('.country-title');
       switch (document.getElementById('search-country').value) {
-        case 'us':
-          countryTitle.textContent = 'News from ' + '🇺🇸 United States';
-          break;
-        case 'cn':
-          countryTitle.textContent = 'News from ' + '🇨🇳 China';
-          break;
-        case 'gb':
-          countryTitle.textContent = 'News from ' + '🇬🇧 United Kingdom';
-          break;
+      case 'us':
+        countryTitle.textContent = 'News from ' + '🇺🇸 United States';
+        break;
+      case 'cn':
+        countryTitle.textContent = 'News from ' + '🇨🇳 China';
+        break;
+      case 'gb':
+        countryTitle.textContent = 'News from ' + '🇬🇧 United Kingdom';
+        break;
+      case 'au':
+        countryTitle.textContent = 'News from ' + '🇦🇺 Australia';
+        break;
+      case 'pk':
+        countryTitle.textContent = 'News from ' + '🇵🇰 Pakistan';
+        break;
+      case 'ru':
+        countryTitle.textContent = 'News from ' + '🇷🇺 Russia';
+        break;
       }
   if (data['data'].length !== 0) {
     if (data['data'].length > 5) {
@@ -112,18 +122,17 @@ const getOpposite = () => {
   else {
     randomOpposite = groupA[Math.floor(Math.random() * groupA.length)];
   }
-  let oppSearchTerm = '&keywords=' + document.getElementById('search-topic').value;
-  let oppCountry = '&countries=' + randomOpposite;
-  let oppURL = url + oppSearchTerm + oppCountry;
+  const lang = '&language=en';
+  let oppCountry = '&locale=' + randomOpposite;
+  let oppSearchTerm = '&search=' + document.getElementById('search-topic').value;
+  let oppURL = url + lang + oppCountry + oppSearchTerm;
   console.log(oppURL);
   const oppReq = new Request(oppURL);
   sendOppositeRequest(oppReq);
 }
 
 const sendOppositeRequest = (oppReq) => {
-  fetch(oppReq, {
-    mode: 'cors'
-  })
+  fetch(oppReq, {mode: 'cors'})
   .then(function (response) {
     return response.json();
   })
@@ -144,6 +153,15 @@ const populateOppositeContent = (data) => {
         break;
       case 'gb':
         oppCountryTitle.textContent = 'News from ' + '🇬🇧 United Kingdom';
+        break;
+      case 'au':
+        oppCountryTitle.textContent = 'News from ' + '🇦🇺 Australia';
+        break;
+      case 'pk':
+        oppCountryTitle.textContent = 'News from ' + '🇵🇰 Pakistan';
+        break;
+      case 'ru':
+        oppCountryTitle.textContent = 'News from ' + '🇷🇺 Russia';
         break;
     }
   if (data['data'].length !== 0) {
@@ -184,7 +202,7 @@ const manipulateDOM = (() => {
     article.appendChild(title);
     const desc = document.createElement('div');
     desc.classList.add('description');
-    desc.textContent = data['data'][i]['description'];
+    desc.textContent = data['data'][i]['snippet'];
     article.appendChild(desc);
     const date = document.createElement('div');
     date.classList.add('date');
@@ -211,7 +229,7 @@ const manipulateDOM = (() => {
     oppArticle.appendChild(oppTitle);
     const oppDesc = document.createElement('div');
     oppDesc.classList.add('description');
-    oppDesc.textContent = data['data'][i]['description'];
+    oppDesc.textContent = data['data'][i]['snippet'];
     oppArticle.appendChild(oppDesc);
     const oppDate = document.createElement('div');
     oppDate.classList.add('date');
